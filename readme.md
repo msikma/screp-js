@@ -1,4 +1,4 @@
-[![Apache 2.0 license](https://img.shields.io/badge/license-Apache--2.0-green)](https://www.apache.org/licenses/LICENSE-2.0) [![npm version](https://badge.fury.io/js/screp-js.svg)](https://badge.fury.io/js/screp-js)
+[![Apache 2.0 license](https://img.shields.io/badge/license-Apache--2.0-green)](https://www.apache.org/licenses/LICENSE-2.0) [![npm version](https://badge.fury.io/js/screp-js-wrapper.svg)](https://badge.fury.io/js/screp-js-wrapper)
 
 # screp-js-wrapper
 
