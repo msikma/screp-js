@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>screp-js-wrapper file drag and drop test</title>
+  <script src="../dist/index.js"></script>
+  <style>
+  body {
+    margin: 8px;
+  }
+  .tool {
+    display: flex;
+    gap: 20px;
+  }
+  .result-container {
+    flex: 1 1 60%;
+    border: 1px silver solid;
+    min-height: 20em;
+    border-radius: 0.5em;
+  }
+  .result-container p {
+    text-align: center;
+    font-weight: bold;
+  }
+  #result {
+    white-space: pre-wrap;
+    padding: 1em;
+    padding-top: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+  }
+  #result > div {
+    max-height: 30em;
+    overflow: scroll;
+  }
+  #dragdrop {
+    border: 3px silver dashed;
+    box-sizing: border-box;
+    cursor: pointer;
+    flex: 1 1 40%;
+    font-weight: bold;
+    height: calc(30em - 23px);
+    padding: 1em;
+    text-align: center;
+  }
+  #dragdrop.dropping {
+    border-color: black;
+  }
+  </style>
+</head>
+<body>
+  <h1>screp-js-wrapper example</h1>
+  <p>This is a <tt><a href="https://github.com/msikma/screp-js-wrapper">screp-js-wrapper</a></tt> file drag and drop example.</p>
+  <p><tt>screp</tt> (StarCraft: Brood War Replay Parser) is a library for extracting information from StarCraft replay files. <tt>screp-js-wrapper</tt> is a simple wrapper library using GopherJS, a compiler from Go to Javascript, that makes it available for use in the browser.</p>
+  <p>For more information:</p>
+  <ul>
+    <li><a href="https://github.com/msikma/screp-js-wrapper">msikma/screp-js-wrapper</a> - this library's information</li>
+    <li><a href="https://github.com/icza/screp">icza/screp</a> - original parsing library, written in Go</li>
+    <li><a href="https://github.com/gopherjs/gopherjs">GopherJS</a> - a Go to Javascript compiler</li>
+  </ul>
+  <div class="tool">
+    <div id="dragdrop">Drag and drop .rep file here</div>
+    <div class="result-container">
+      <p>Data will be shown here (and also passed through <tt>console.log()</tt>).</p>
+      <div id="result">
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+/** Converts a Blob object (or in our case, a File object which implements Blob) into a Uint8Array. */
+async function toUint8Array(blob) {
+  return new Uint8Array(await new Response(blob).arrayBuffer())
+}
+
+/** Processes a single .rep file. */
+async function processRep(file) {
+  const buffer = await toUint8Array(file)
+  try {
+    console.time('screp buffer parsing')
+    const res = await Screp.parseBuffer(buffer)
+    console.timeEnd('screp buffer parsing')
+    console.log('parsing succeeded:', res)
+    return `<div>${JSON.stringify(res, null, 2).replace(/\n/g, '<br>')}</div>`
+  }
+  catch (err) {
+    console.log('parsing failed:', err)
+    return `<b>${err}</b>`
+  }
+}
+
+/** Area the results will be shown in. */
+const result = document.querySelector('#result')
+
+/** Creates a drop area for dragging .rep files in. */
+const dragdrop = document.querySelector('#dragdrop')
+dragdrop.ondragenter = function(e) {
+  if (e.target !== this) {
+    return
+  }
+}
+
+dragdrop.ondragover = function(e) {
+  this.classList.add('dropping')
+  e.preventDefault()
+}
+
+dragdrop.ondragleave = function(e) {
+  if (e.target !== this) {
+    return
+  }
+  this.classList.remove('dropping')
+}
+
+dragdrop.ondrop = async function(e) {
+  e.preventDefault()
+  this.classList.remove('dropping')
+
+  const html = await Promise.all([...e.dataTransfer.files].map(file => processRep(file)))
+  result.innerHTML = html.join('<hr>')
+}
+
+dragdrop.onclick = function(e) {
+  const upload = document.createElement('input')
+  upload.setAttribute('type', 'file')
+  upload.setAttribute('multiple', 'multiple')
+  upload.setAttribute('accept', '.rep')
+  upload.style.display = 'none'
+  upload.onchange = async function() {
+    const html = await Promise.all([...this.files].map(file => processRep(file)))
+    result.innerHTML = html.join('<hr>')
+    this.parentNode.removeChild(this)
+  }
+  upload.onclick = function(e) {
+    e.stopPropagation()
+  }
+  this.appendChild(upload)
+  upload.click()
+}
+</script>
+</html> 
