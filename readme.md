@@ -67,7 +67,7 @@ Screp.parseBuffer(uint8arr[, {options}])
 
 **Returns:**
 
-* **object**: the same data as you'd get from the screp command line tool
+* Promise (**object**): the same data as you'd get from the screp command line tool
 
 The defaults are the same as those for the screp command line tool.
 
