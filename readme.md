@@ -23,7 +23,7 @@ Keep in mind that the compiled screp library in JS is about 367 KB gzipped (and 
 The screp library can be either included in an HTML page, in which case it will be added to the global namespace as `ScrepJS`, or it can be imported as a CommonJS module:
 
 ```js
-const {Screp} = require('screp-js-wrapper')
+const Screp = require('screp-js-wrapper')
 
 const processRep(uint8arr) {
   try {
