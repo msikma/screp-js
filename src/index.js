@@ -1,7 +1,7 @@
 // screp-js <https://github.com/msikma/screp-js>
 // © Apache 2.0 license
 
-const {ScrepJS} = require('screp-js')
+const {ScrepJS} = require('screp-js-wrapper')
 const {transformResult, versionToObject} = require('./transform')
 const {filterResult} = require('./filter')
 
