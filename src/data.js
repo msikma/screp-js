@@ -1,4 +1,4 @@
-// screp-js-wrapper <https://github.com/msikma/screp-js-wrapper>
+// screp-js <https://github.com/msikma/screp-js>
 // © Apache 2.0 license
 
 /** Checks whether something is an array. */
