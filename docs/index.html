@@ -29,9 +29,13 @@
     box-sizing: border-box;
     font-family: monospace;
   }
-  #result > div {
-    max-height: 30em;
+  #result > div p {
+  }
+  #result > div textarea {
+    min-height: 30em;
     overflow: scroll;
+    box-sizing: border-box;
+    width: 100%;
   }
   #dragdrop {
     border: 3px silver dashed;
@@ -81,7 +85,7 @@ async function processRep(file) {
     const res = await Screp.parseBuffer(buffer)
     console.timeEnd('screp buffer parsing')
     console.log('parsing succeeded:', res)
-    return `<div>${JSON.stringify(res, null, 2).replace(/\n/g, '<br>')}</div>`
+    return `<div><p>${file.name} (${file.size} bytes)</p><textarea>${JSON.stringify(res, null, 2)}</textarea></div>`
   }
   catch (err) {
     console.log('parsing failed:', err)
