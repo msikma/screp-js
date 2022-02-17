@@ -632,10 +632,10 @@ schema-utils@^3.1.0, schema-utils@^3.1.1:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-screp-js@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/screp-js/-/screp-js-0.1.2.tgz#be43aa0c70557881df03698aa017529ddd025b12"
-  integrity sha512-6RYoX/gOrBoWUl+8I8aUAU+sZ3NVCj9UgoIiXtjKbsQGvidVNYAAjoQJrqrE3GfixD+69CwJqJp5C5MzLOv10Q==
+screp-js-wrapper@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/screp-js-wrapper/-/screp-js-wrapper-0.2.0.tgz#e88f1b09c1b6569c8821574633077ec9753863c9"
+  integrity sha512-qZ4rCVJQpKOaYyoGk+4I4LxJ0R5aorYe8JimLR+zBPCE34IYAX3/J5fS7WRjmxhMquBHbPqYSN+wUaoID7d/HA==
 
 serialize-javascript@^6.0.0:
   version "6.0.0"
