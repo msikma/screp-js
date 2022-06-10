@@ -5,18 +5,21 @@ const {isPlainObject, isArray} = require('./data')
 
 /**
  * Iterates over object nodes and processes them according to a given function.
+ * 
+ * All nodes that get transformed into 'undefined' are removed.
  */
 function walkObjectNodes(process, nodeNames = []) {
   const next = obj => {
     if (isPlainObject(obj)) {
-      return Object.fromEntries(Object.entries(obj).flatMap(([key, value]) => {
+      const processed = Object.entries(obj).flatMap(([key, value]) => {
         if (nodeNames.includes(key)) {
           return process(key, value, next)
         }
         else {
           return [[key, next(value)]]
         }
-      }))
+      })
+      return Object.fromEntries(processed.filter(item => item !== undefined))
     }
     else if (isArray(obj)) {
       return obj.map(value => next(value))
@@ -43,7 +46,7 @@ function destructureObjectNodes(obj, nodeNames = []) {
  */
 function removeObjectNodesIfZero(obj, nodeNames = []) {
   return walkObjectNodes(
-    (key, value) => [value === 0 ? [] : [key, value]],
+    (key, value) => [value === 0 ? undefined : [key, value]],
     nodeNames
   )(obj)
 }
@@ -53,7 +56,7 @@ function removeObjectNodesIfZero(obj, nodeNames = []) {
  */
 function removeObjectNodes(obj, nodeNames = []) {
   return walkObjectNodes(
-    () => [[]],
+    () => undefined,
     nodeNames
   )(obj)
 }
@@ -87,11 +90,16 @@ function numericObjectToArray(obj, nodeNames = []) {
  * We don't do this JSON encoding step because it's very slow. Instead,
  * this function manually resolves all differences in the format.
  * 
- * Note: options.rawData is undocumented.
+ * Note: 'options._rawData', 'doTransform' and 'doRoundtrip' are undocumented.
  */
-function transformResult(inputObj, {rawData = false} = {}) {
+function transformResult(inputObj, {_rawData = false} = {}, doTransform = true, doRoundtrip = true) {
+  // Debugging: return the object verbatim if we're skipping the transform step.
+  if (!doTransform) {
+    return inputObj
+  }
+  
   let obj = inputObj
-
+  
   obj = destructureObjectNodes(obj, ['Enum', 'Base'])
   obj.Commands = setEmptyNodesToNull(obj.Commands, ['ParseErrCmds'])
   obj.Commands.Cmds = numericObjectToArray(obj.Commands.Cmds, ['UnitTags'])
@@ -102,12 +110,17 @@ function transformResult(inputObj, {rawData = false} = {}) {
   obj.MapData.StartLocations = destructureObjectNodes(obj.MapData.StartLocations, ['Point'])
 
   // These nodes should be removed, but can probably remain without causing incompatibilities.
-  if (rawData === false) {
+  if (_rawData === false) {
     obj.Commands = removeObjectNodes(obj.Commands, ['Debug'])
     obj.Computed = removeObjectNodes(obj.Computed, ['PIDPlayerDescs'])
     obj.Header = removeObjectNodes(obj.Header, ['Debug', 'OrigPlayers', 'PIDPlayers', 'RawHost', 'RawMap', 'RawTitle', 'Slots'])
     obj.Header.Players = removeObjectNodes(obj.Header.Players, ['RawName'])
     obj.MapData = removeObjectNodes(obj.MapData, ['Debug'])
+  }
+
+  // Debugging: convert the object to JSON and back. We opt not to do this since it's unnecessary.
+  if (doRoundtrip) {
+    obj = JSON.parse(JSON.stringify(obj))
   }
 
   return obj
