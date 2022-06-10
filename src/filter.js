@@ -5,14 +5,22 @@
  * Removes unwanted sections from the output.
  * 
  * This simply sets the sections to null. Processing speed is unaffected.
+ * 
+ * Note: 'doFilter' is undocumented.
  */
-function filterResult(inputObj, {header, computed, mapData, mapTiles, mapResLoc, cmds} = {}) {
+function filterResult(inputObj, {header, computed, mapData, mapTiles, mapResLoc, cmds} = {}, doFilter = true) {
+  // Debugging: return the object verbatim if we're skipping the filter step.
+  if (!doFilter) {
+    return inputObj
+  }
+
   let obj = inputObj
+
   if (!header) {
     obj.Header = null
   }
   if (!computed) {
-    obj.Commands = null
+    obj.Computed = null
   }
   if (!mapData) {
     obj.MapData = null
@@ -29,6 +37,7 @@ function filterResult(inputObj, {header, computed, mapData, mapTiles, mapResLoc,
   if (!cmds) {
     obj.Commands = null
   }
+  
   return obj
 }
 
