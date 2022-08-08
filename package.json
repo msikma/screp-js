@@ -1,10 +1,11 @@
 {
   "name": "screp-js",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Pure Javascript version of screp, a StarCraft: Remastered replay file parser, compiled from the original Go version using GopherJS",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "webpack"
   },
   "files": [
     "index.js",
@@ -29,7 +30,7 @@
     "lodash.clonedeep": "^4.5.0"
   },
   "dependencies": {
-    "screp-js-wrapper": "^0.2.0",
+    "screp-js-wrapper": "^0.3.0",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2"
   }

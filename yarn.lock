@@ -2284,10 +2284,10 @@ schema-utils@^3.1.0, schema-utils@^3.1.1:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-screp-js-wrapper@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/screp-js-wrapper/-/screp-js-wrapper-0.2.0.tgz#e88f1b09c1b6569c8821574633077ec9753863c9"
-  integrity sha512-qZ4rCVJQpKOaYyoGk+4I4LxJ0R5aorYe8JimLR+zBPCE34IYAX3/J5fS7WRjmxhMquBHbPqYSN+wUaoID7d/HA==
+screp-js-wrapper@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/screp-js-wrapper/-/screp-js-wrapper-0.3.0.tgz#3ce5db3e999a96fdf30af37742c685daa1364fec"
+  integrity sha512-7Hpno/Zhgcv479/hHFmNXoofCXvtj+GmRXoFxuf31w7X1vy6VKzNqlrwk6e5Cqyctw+f+Z/wPfhDSgx9wzIhig==
 
 semver@^6.0.0, semver@^6.3.0:
   version "6.3.0"
