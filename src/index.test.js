@@ -92,6 +92,7 @@ describe(`screp-js package`, () => {
           expect(repData.MapData.Tiles).toBe(null)
           expect(repData.MapData.MineralFields).toBe(null)
           expect(repData.MapData.Geysers).toBe(null)
+          expect(Object.keys(repData.MapData)).toEqual(expect.arrayContaining(['PlayerOwners', 'PlayerSides']))
         }],
         [{mapData: true, mapTiles: true}, repData => {
           expect(repData.MapData).not.toBe(null)
@@ -110,6 +111,7 @@ describe(`screp-js package`, () => {
           expect(repData.MapData.Tiles).toBe(null)
           expect(repData.MapData.MineralFields).not.toBe(null)
           expect(repData.MapData.Geysers).not.toBe(null)
+          expect(Object.keys(repData.MapData.MineralFields[0])).toEqual(['X', 'Y', 'Amount'])
         }],
         [{mapData: false, mapTiles: true, mapResLoc: true}, repData => {
           expect(repData.MapData).toBe(null)
