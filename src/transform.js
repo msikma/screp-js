@@ -108,6 +108,7 @@ function transformResult(inputObj, {_rawData = false} = {}, doTransform = true, 
   obj.Computed.LeaveGameCmds = removeObjectNodesIfZero(obj.Computed.LeaveGameCmds, ['IneffKind'])
   obj.MapData = numericObjectToArray(obj.MapData, ['Tiles'])
   obj.MapData.StartLocations = destructureObjectNodes(obj.MapData.StartLocations, ['Point'])
+  obj.MapData.MineralFields = destructureObjectNodes(obj.MapData.MineralFields, ['Point'])
 
   // These nodes should be removed, but can probably remain without causing incompatibilities.
   if (_rawData === false) {
