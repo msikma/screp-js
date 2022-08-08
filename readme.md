@@ -1,10 +1,10 @@
-[![Apache 2.0 license](https://img.shields.io/badge/license-Apache--2.0-green)](https://www.apache.org/licenses/LICENSE-2.0) [![npm version](https://badge.fury.io/js/screp-js.svg)](https://badge.fury.io/js/screp-js)
+[![Apache 2.0 license](https://img.shields.io/badge/license-Apache--2.0-green)](https://www.apache.org/licenses/LICENSE-2.0) [![npm version](https://badge.fury.io/js/screp-js.svg)](https://www.npmjs.com/package/screp-js-wrapper) [![screp v1.7.2](https://img.shields.io/badge/screp-v1.7.2-orange)](https://www.npmjs.com/package/screp-js-wrapper)
 
 # screp-js
 
 A pure Javascript version of [screp](https://github.com/icza/screp), a StarCraft: Remastered replay file parser, compiled from the original Go version using [GopherJS](https://github.com/gopherjs/gopherjs).
 
-screp (StarCraft: Brood War Replay Parser) is a library for extracting information from StarCraft replay files. This library uses a compiled version of the original library recompiled for Javascript. It's designed to parse file buffers of .rep files—if you want an easier interface aimed at parsing files through Node, try [screp-js-file](https://github.com/msikma/screp-js-file).
+screp (StarCraft: Brood War Replay Parser) is a library for extracting information from StarCraft replay files. This library is based on a recompiled version of that library for Javascript. It's designed to parse file buffers of .rep files—if you want an easier interface aimed at parsing files through Node, try [screp-js-file](https://github.com/msikma/screp-js-file).
 
 This wrapper is usable both as a CommonJS module and as a browser global.
 
@@ -94,6 +94,11 @@ Screp.getVersionObject()
 **Returns:**
 
 * **object**: version information in object form, with only the pertinent information included
+
+## External links
+
+* [Live example of ScrepJS](https://msikma.github.io/screp-js/)
+* [icza/screp](https://github.com/icza/screp), the original project
 
 ## Copyright
 
