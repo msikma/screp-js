@@ -1,4 +1,4 @@
-[![Apache 2.0 license](https://img.shields.io/badge/license-Apache--2.0-green)](https://www.apache.org/licenses/LICENSE-2.0) [![npm version](https://badge.fury.io/js/screp-js.svg)](https://www.npmjs.com/package/screp-js-wrapper) [![screp v1.7.2](https://img.shields.io/badge/screp-v1.7.2-orange)](https://www.npmjs.com/package/screp-js-wrapper)
+[![Apache 2.0 license](https://img.shields.io/badge/license-Apache--2.0-green)](https://www.apache.org/licenses/LICENSE-2.0) [![npm version](https://badge.fury.io/js/screp-js.svg)](https://www.npmjs.com/package/screp-js) [![screp v1.7.2](https://img.shields.io/badge/screp-v1.7.2-orange)](https://www.npmjs.com/package/screp-js)
 
 # screp-js
 
